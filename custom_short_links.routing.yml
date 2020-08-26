@@ -1,0 +1,7 @@
+custom_short_links.shor_link_form:
+  path: '/custom_short_links/form/shor_link'
+  defaults:
+    _form: '\Drupal\custom_short_links\Form\ShorLinkForm'
+    _title: 'ShorLinkForm'
+  requirements:
+    _access: 'TRUE'

@@ -1,0 +1,13 @@
+{
+    "name": "custom_short_links",
+    "type": "drupal-module",
+    "description": "My Awesome Module",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/custom_short_links",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/custom_short_links",
+        "source": "http://cgit.drupalcode.org/custom_short_links",
+    },
+}
