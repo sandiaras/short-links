@@ -8,13 +8,13 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Class ShorLinkForm.
  */
-class ShorLinkForm extends FormBase {
+class ShortLinkForm extends FormBase {
 
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'shor_link_form';
+    return 'short_link_form';
   }
 
   /**
@@ -24,9 +24,7 @@ class ShorLinkForm extends FormBase {
     $form['long_url'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Long Url'),
-      '#maxlength' => 64,
-      '#size' => 64,
-      '#weight' => '0',
+      '#description' => $this->t('Enter the long url. Ex.: http://mi-site.com/abc'),
     ];
     $form['submit'] = [
       '#type' => 'submit',
@@ -40,9 +38,12 @@ class ShorLinkForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    foreach ($form_state->getValues() as $key => $value) {
-      // @TODO: Validate fields.
+
+    $longUrl = $form_state->getValue('long_url');
+    if (!filter_var($longUrl, FILTER_VALIDATE_URL)) {
+      $form_state->setErrorByName('long_url', $this->t('Invalid URL'));
     }
+
     parent::validateForm($form, $form_state);
   }
 
@@ -50,10 +51,24 @@ class ShorLinkForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // Display result.
-    foreach ($form_state->getValues() as $key => $value) {
-      \Drupal::messenger()->addMessage($key . ': ' . ($key === 'text_format'?$value['value']:$value));
-    }
+
+    $length = rand(5,8);
+    $data = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz';
+
+    $shortUrl = substr(str_shuffle($data), 0, $length);
+
+    $database = \Drupal::service('database');
+    $result = $database->insert('short_links')
+        ->fields([
+          'long_url' => $form_state->getValue('long_url'),
+          'short_url' => $shortUrl
+        ])
+        ->execute();
+
+    $dialogText = "Your new user ID: $result";
+
+    \Drupal::messenger()->addMessage($dialogText);
+
   }
 
 }

@@ -1,7 +1,15 @@
-custom_short_links.shor_link_form:
-  path: '/custom_short_links/form/shor_link'
+custom_short_links.short_link_form:
+  path: '/custom_short_links/form/short_link'
   defaults:
-    _form: '\Drupal\custom_short_links\Form\ShorLinkForm'
+    _form: '\Drupal\custom_short_links\Form\ShortLinkForm'
     _title: 'ShorLinkForm'
   requirements:
     _access: 'TRUE'
+
+custom_short_links.view_short_link_controller:
+  path: '/view/{shortLink}'
+  defaults:
+    _controller: '\Drupal\custom_short_links\Controller\ViewShortLinkController::view'
+    _title: 'View info'
+  requirements:
+    _permission: 'access content'

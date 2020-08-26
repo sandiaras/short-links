@@ -1,0 +1,55 @@
+<?php
+
+
+/**
+ * Implements hook_schema().
+ *
+ * Defines the database tables used by this module.
+ *
+ * @see hook_schema()
+ *
+ * @ingroup dbtng_example
+ */
+function custom_short_links_schema() {
+
+
+  $schema['short_links'] = [
+      'description' => 'Stores short links',
+      'fields' => [
+        'slid' => [
+          'type' => 'serial',
+          'not null' => TRUE,
+          'description' => 'Primary Key: Unique ID.',
+        ],
+        'date' => [
+          'mysql_type' => 'timestamp',
+          'not null' => TRUE,
+          'mysql_default' => CURRENT_TIMESTAMP,
+          'description' => 'Date when the short link was create',
+        ],
+        'long_url' => [
+          'type' => 'varchar',
+          'length' => 512,
+          'not null' => TRUE,
+          'default' => '',
+          'description' => 'The long URL',
+        ],
+        'short_url' => [
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => TRUE,
+          'default' => '',
+          'description' => 'The short link created',
+        ],
+        'views' => [
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 0,
+          'description' => 'Number of views',
+        ],
+      ],
+      'primary key' => ['slid'],
+    ];
+
+  return $schema;
+}
