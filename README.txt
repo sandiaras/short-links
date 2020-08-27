@@ -25,9 +25,15 @@ CONFIGURATION
 -------------
 
 Once installed, you can define the initial form as the home page of the site, going to:
+
   admin/config/system/site-information
 
 and define the link "/create/short_link" as front page.
+
+
+To view details of the short link, you have to go (just the text at the end of the link):
+
+  /view/[short link]
 
 DEVELOPERS
 ----------
