@@ -1,8 +1,8 @@
 custom_short_links.short_link_form:
-  path: '/custom_short_links/form/short_link'
+  path: '/create/short_link'
   defaults:
-    _form: '\Drupal\custom_short_links\Form\ShortLinkForm'
-    _title: 'ShorLinkForm'
+    _form: '\Drupal\custom_short_links\Form\CreateShortLinkForm'
+    _title: 'Create Short Link'
   requirements:
     _access: 'TRUE'
 
@@ -10,6 +10,24 @@ custom_short_links.view_short_link_controller:
   path: '/view/{shortLink}'
   defaults:
     _controller: '\Drupal\custom_short_links\Controller\ViewShortLinkController::view'
-    _title: 'View info'
+    _title: 'Short Link Info'
   requirements:
     _permission: 'access content'
+    shortLink: '[a-zA-Z0-9]+'
+
+custom_short_links.redirect_short_link_controller_redirect:
+  path: '/redirect/{shortLink}'
+  defaults:
+    _controller: '\Drupal\custom_short_links\Controller\RedirectShortLinkController::redirect'
+    _title: 'Redirect Short Links'
+  requirements:
+    _permission: 'access content'
+
+custom_short_links.show_short_link_controller_show:
+  path: '/show/{shortLink}'
+  defaults:
+    _controller: '\Drupal\custom_short_links\Controller\ShowShortLinkController::show'
+    _title: 'New Short Link registered'
+  requirements:
+    _permission: 'access content'
+    shortLink: '[a-zA-Z0-9]+'

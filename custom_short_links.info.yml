@@ -1,5 +1,5 @@
 name: 'Custom Short Links'
 type: module
-description: 'My Awesome Module'
+description: 'Create short links and manage them'
 core: 8.x
-package: 'Create short link and manage them'
+package: 'Custom'
